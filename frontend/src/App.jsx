@@ -1,10 +1,17 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router";
+import Home from './pages/Home';
+import Layout from './pages/Layout';
 
 const App = () => {
   return (
-    <div className ="bg-teal-200 w-full h-10 font-extrabold">
-      Hello EveryOne !
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Home />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
   )
 }
 
