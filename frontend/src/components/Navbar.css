@@ -1,12 +1,21 @@
+/* Logo text */
+.gradient-text {
+  background: linear-gradient(135deg, rgba(249, 200, 66, 0.8)
+  0%, rgba(234, 84, 85, 1)
+  130%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Navbar */
 .navbar {
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    position: sticky;
     top: 0;
-    z-index: 20;
+    z-index: 30;
+    position: relative;
   }
   
   .nav-container {

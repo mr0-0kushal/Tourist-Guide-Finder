@@ -24,12 +24,12 @@ function NavBar() {
   }, []);
   return (
     <>
-      <nav className={`navbar transition-all duration-300 ${
-        scrolled ? "bg-[#FBBB0B80]" : "bg-transparent"
+      <nav className={`navbar transition-all duration-300  ${
+        scrolled ? "" : "bg-transparent"
       }`}>
         <div className="nav-container">
           <NavLink exact to="/" className="nav-logo">
-            <span>E-Guide</span>
+            <h1 className="font-extrabold text-4xl logo gradient-text">E-Guide</h1>
           </NavLink>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
