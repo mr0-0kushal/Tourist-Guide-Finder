@@ -1,1 +1,0 @@
-This is our platform where you can find the tourist guide easily.
