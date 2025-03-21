@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.css'
 import BlogCard from '../components/BlogCard'
+// import ContactForm from '../components/ContactForm';
 const cardData = [
   {
     title: "Personalized Tours",
@@ -116,8 +117,59 @@ const Home = () => {
       </button>
     </div>
       {/* section3 */}
-      <div id="contact" className='flex w-full min-h-screen p-3 bg-gray-100 section'>
-        Contact Us
+      <div id="contact" className='flex flex-col w-full min-h-screen p-3 text-centre section mt-10'>
+        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center  ">Contact Us</h2>
+        <p className="text-gray-600 mb-8 text-center">
+          Have questions? Whether you're a traveler looking for a guide or a local guide wanting to connect, we're here to help!
+        </p>
+
+        <div className="flex flex-col md:flex-row justify-around gap-8">
+          {/* Contact Form */}
+          {/* <ContactForm /> */}
+          {/* Contact Details */}
+          <div className="text-left space-y-4 pt-10">
+            <div className="flex items-center space-x-3">
+              <span className="text-xl font-semibold">📞 Phone:</span>
+              <span className="text-gray-700">+1 (XXX) XXX-XXXX</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <span className="text-xl font-semibold">📧 Email:</span>
+              <span className="text-gray-700">support@yourprojectname.com</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <span className="text-xl font-semibold">📍 Location:</span>
+              <span className="text-gray-700">[Your Address]</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <span className="text-xl font-semibold">📲 Follow Us:</span>
+              <div className="flex space-x-4">
+                <a href="#" className="text-blue-500 hover:text-blue-700">Facebook</a>
+                <a href="#" className="text-pink-500 hover:text-pink-700">Instagram</a>
+                <a href="#" className="text-blue-400 hover:text-blue-600">Twitter</a>
+                <a href="#" className="text-blue-600 hover:text-blue-800">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          {/* <div className="bg-white p-6 rounded-lg shadow-md">
+            <form className="space-y-4">
+              <div>
+                <label className="block text-gray-700 font-medium">Name</label>
+                <input type="text" className="w-full p-2 border rounded-lg focus:ring focus:ring-blue-200" placeholder="Your Name" />
+              </div>
+              <div>
+                <label className="block text-gray-700 font-medium">Email</label>
+                <input type="email" className="w-full p-2 border rounded-lg focus:ring focus:ring-blue-200" placeholder="Your Email" />
+              </div>
+              <div>
+                <label className="block text-gray-700 font-medium">Message</label>
+                <textarea className="w-full p-2 border rounded-lg focus:ring focus:ring-blue-200" rows="4" placeholder="Your Message"></textarea>
+              </div>
+              <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                Send Message
+              </button>
+            </form>
+          </div> */}
+        </div>
       </div>
     </div>
   )
