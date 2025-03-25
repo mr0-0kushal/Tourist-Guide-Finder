@@ -70,12 +70,58 @@ export const updateTour = async (req, res) => {
     }
 };
 
+//update guide
+export const updateGuide = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const updatedGuide = await Guide.findByIdAndUpdate(id,
+            {
+                $set: req.body
+            },
+            {
+                new: true
+            });
+
+        res.status(200).json({
+            success: true,
+            message: 'Successfully updated',
+            data: updatedGuide
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to update'
+        });
+    }
+};
+
 //delete tour
 
 export const deleteTour = async (req, res) => {
     const id = req.params.id;
     try {
         await Tour.findByIdAndDelete(id);
+        res.status(200).json({
+            success: true,
+            message: 'Successfully deleted',
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to delete'
+        });
+    }
+};
+//delete guide
+
+export const deleteGuide = async (req, res) => {
+    const id = req.params.id;
+    try {
+        await Guide.findByIdAndDelete(id);
         res.status(200).json({
             success: true,
             message: 'Successfully deleted',

@@ -26,12 +26,12 @@ const GuideCard = ({ guide }) => {
             </span>
           </div>
           <h5 className="guide__name">
-            <Link to={`/guides/${_id}`}>{name}</Link>
+            <Link to={`/guide/${_id}`}>{name}</Link>
           </h5>
           <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
             <h5>₹{pricePerHour} <span> /per hour</span></h5>
             <button className="btn booking__btn">
-              <Link to={`/guides/${_id}`}>Hire Now</Link>
+              <Link to={`/guide/${_id}`}>Hire Now</Link>
             </button>
           </div>
         </CardBody>
