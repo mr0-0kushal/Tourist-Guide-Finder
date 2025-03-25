@@ -6,7 +6,7 @@
 }
 
 .logo img {
-    width: 7.8%;
+    width: 30%;
 }
 
 .menu{
@@ -25,7 +25,7 @@
 }
 
 .nav__item a.active__link{
-    color: var(--secondary-color);
+    color: #2882D9;
 }
 
 .mobile__menu{

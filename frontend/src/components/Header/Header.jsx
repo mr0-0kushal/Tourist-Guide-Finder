@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useContext } from 'react'
 import { Container, Row, Button} from 'reactstrap'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 // import logo from '../../assets/images/logo.png'
-import logo from '../../assets/images/horizon.png'
+import logo from '../../assets/images/rideNguide.png'
 import './header.css'
 import { AuthContext } from '../../context/AuthContext'
 
@@ -19,6 +19,10 @@ const nav_links = [
   {
     path: '/tours',
     display: 'Tours',
+  },
+  {
+    path: '/guides',
+    display: 'Guides',
   },
 ]
 

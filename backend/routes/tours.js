@@ -1,6 +1,6 @@
 import express from "express";
-import { createTour, deleteTour, getAllTour, getFeaturedTour,
-     getSingleTour, getTourBySearch, getTourCount, updateTour } from "../controllers/tourController.js";
+import { createTour, deleteTour, getAllTour, getFeaturedTour, getFeaturedTourGuide ,
+     getSingleTour, getTourBySearch, getTourCount, updateTour , getGuideCount} from "../controllers/tourController.js";
 
 
 const router= express.Router();
@@ -28,8 +28,14 @@ router.get("/search/getTourBySearch" , getTourBySearch);
 //get featured tour
 router.get("/search/getFeaturedTours" , getFeaturedTour);
 
+//get featured tour guide
+router.get("/search/getFeaturedToursGuide" , getFeaturedTourGuide);
+
 //get tour count
 router.get("/search/getTourCount" , getTourCount);
+
+//get guide count
+router.get("/search/getGuideCount" , getGuideCount);
 
 
 

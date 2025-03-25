@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import tourRoute  from './routes/tours.js'
+import guideRoute  from './routes/guide.js'
 import userRoute from './routes/users.js'
 import authRoute from './routes/auth.js'
 import reviewRoute from './routes/review.js'
@@ -50,6 +51,7 @@ app.use("/api/v1/tours" , tourRoute);
 app.use("/api/v1/users" , userRoute);
 app.use("/api/v1/review" , reviewRoute);
 app.use("/api/v1/booking" , bookingRoute);
+app.use("/api/v1/guide" , guideRoute);
 
 
 

@@ -1,4 +1,5 @@
 import Tour from "../models/Tour.js"
+import Guide from "../models/Guide.js"
 
 
 //create a new tour
@@ -12,6 +13,26 @@ export const createTour = async (req, res) => {
             success: true,
             message: 'Successfully created',
             data: savedTour
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to create. Try Again'
+        });
+    }
+};
+//create a new guide 
+export const createGuide = async (req, res) => {
+
+    const newGuide = new Guide(req.body);
+
+    try {
+        const savedGuide = await newGuide.save();
+        res.status(200).json({
+            success: true,
+            message: 'Successfully created',
+            data: savedGuide
         });
     } catch (err) {
         console.log(err);
@@ -90,6 +111,27 @@ export const getSingleTour = async (req, res) => {
     }
 };
 
+//getSingleGuide
+
+export const getSingleGuide = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const guide = await Guide.findById(id).populate("reviews");
+        res.status(200).json({
+            success: true,
+            message: 'Successfully found',
+            data: guide,
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.status(404).json({
+            success: false,
+            message: 'not found'
+        });
+    }
+};
+
 //get all tours
 
 export const getAllTour = async (req, res) => {
@@ -106,6 +148,32 @@ export const getAllTour = async (req, res) => {
             count: tours.length,
              message: "Successfull",
               data: tours });
+
+    }
+    catch (err) {
+        console.log(err);
+        res.status(404).json({
+            success: false,
+            message: "not-found",
+        })
+    }
+};
+//get all tours guide
+
+export const getAllGuide = async (req, res) => {
+  
+      // for pagination
+     const page = parseInt(req.query.page);
+     
+
+    try {
+        const guides = await Guide.find({}).populate('reviews').
+        skip(page * 8).limit(8);
+        
+        res.status(200).json({ success: true,
+            count: guides.length,
+             message: "Successfull",
+              data: guides });
 
     }
     catch (err) {
@@ -165,6 +233,28 @@ export const getFeaturedTour = async (req, res) => {
   }
 };
 
+
+//get featured tours guide
+
+export const getFeaturedTourGuide = async (req, res) => {
+  
+
+  try {
+      const toursGuide = await Guide.find({featured:true}).populate("reviews").limit(8);
+      
+      res.status(200).json({ success: true,
+           message: "Successfull",
+            data: toursGuide });
+
+  }
+  catch (err) {
+      res.status(404).json({
+          success: false,
+          message: "not-found",
+      })
+  }
+};
+
 //get Tour Counts
  
 export const getTourCount =async(req,res) =>{
@@ -174,5 +264,16 @@ export const getTourCount =async(req,res) =>{
 
     }catch(err){
         res.status(500).json({ success:false, message:"failed to fetch"});
+    }
+}
+//get Tour Guide Counts
+ 
+export const getGuideCount =async(req,res) =>{
+    try{
+        const guideCount = await Guide.estimatedDocumentCount();
+        res.status(200).json({success:true, data: guideCount});
+
+    }catch(err){
+        res.status(500).json({ success:false, message:"failed to fetching"});
     }
 }

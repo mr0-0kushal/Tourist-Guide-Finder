@@ -12,6 +12,7 @@ import experienceImg from '../../assets/images/trip.png'
 // import SearchBar from '../../shared/SearchBar'
 import ServiceList from '../../services/ServiceList'
 import FeaturedTourList from '../Featured-tours/FeaturedTourList'
+import FeaturedTourGuideList from '../Featured-tours/FeaturedTourGuideList'
 import MasonryImagesGallery from '../Image-gallery/MasonryImagesGallery'
 import Testimonials from '../Testimonial/Testimonials'
 import Newsletter from '../../shared/Newsletter'
@@ -85,6 +86,25 @@ const Home = () => {
                   </h2>
                 </Col>
                 <FeaturedTourList />
+                </Row>
+                
+              </Container>
+            </section>
+
+            {/*==================featured tourist guide section start======================*/}
+            <section>
+              <Container>
+                <Row>
+                <Col lg='22' className='mb-5'>
+                  {/* <Subtitle subtitle={"Explore"} /> */}
+                  <h5 className="services__subtitle">
+                  Choose
+                </h5>
+                  <h2 className="featured__tour-title">
+                    Our Featured Toursist Guides.
+                  </h2>
+                </Col>
+                <FeaturedTourGuideList />
                 </Row>
                 
               </Container>
