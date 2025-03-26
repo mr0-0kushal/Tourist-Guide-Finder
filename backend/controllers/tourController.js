@@ -286,7 +286,7 @@ export const getFeaturedTourGuide = async (req, res) => {
   
 
   try {
-      const toursGuide = await Guide.find({featured:true}).populate("reviews").limit(8);
+      const toursGuide = await Guide.find({featured:true}).populate("reviews").limit(4);
       
       res.status(200).json({ success: true,
            message: "Successfull",
