@@ -84,6 +84,7 @@ const GuideBooking = ({ guide, avgRating }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`, // Include token
         },
         credentials: "include",
         body: JSON.stringify(booking),
