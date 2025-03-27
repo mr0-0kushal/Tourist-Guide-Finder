@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "type" :"module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-dev":"nodemon index.js",
+    "start-dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm i"
   },
@@ -21,6 +21,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
     "mongodb": "^5.7.0",
-    "mongoose": "^7.3.2"
+    "mongoose": "^7.3.2",
+    "stripe": "^17.7.0"
   }
 }

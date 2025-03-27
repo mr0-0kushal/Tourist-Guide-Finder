@@ -10,6 +10,7 @@ import authRoute from './routes/auth.js'
 import reviewRoute from './routes/review.js'
 import bookingRoute from './routes/bookings.js'
 import guideBookingRoute from './routes/guide-booking.js'
+import paymentRoute from './routes/payment.js'
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.use("/api/v1/review" , reviewRoute);
 app.use("/api/v1/booking" , bookingRoute);
 app.use("/api/v1/guide-booking" , guideBookingRoute);
 app.use("/api/v1/guide" , guideRoute);
+app.use("/api/v1/payment" , paymentRoute);
 
 
 
