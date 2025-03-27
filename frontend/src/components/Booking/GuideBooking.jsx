@@ -73,6 +73,8 @@ const GuideBooking = ({ guide, avgRating }) => {
   //   }
   // };
 
+  const token = localStorage.getItem("accessToken"); 
+
   const handlePayment = async (e) => {
     e.preventDefault();
 
@@ -84,6 +86,7 @@ const GuideBooking = ({ guide, avgRating }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         credentials: "include",
         body: JSON.stringify(booking),
