@@ -19,10 +19,8 @@ const app = express()
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-    origin: "https://tourist-guide-finder.vercel.app",  // 👈 Replace with your actual frontend URL
-    credentials: true,  // 👈 Allows cookies
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
+    origin: true,
+    credentials: true,
 }
 
 
