@@ -1,14 +1,14 @@
 import express from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
-import { verifyToken, verifyUser } from "../utils/verifyToken.js";
+import { verifyToken } from "../utils/verifyToken.js";
 
 dotenv.config();
 const router = express.Router();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // 🟢 Create Stripe Checkout Session
-router.post("/create-checkout-session", verifyUser , verifyToken , async (req, res) => {
+router.post("/create-checkout-session", verifyToken , async (req, res) => {
   try {
     const { guideName, totalPrice } = req.body;
      // ✅ Log incoming request data
