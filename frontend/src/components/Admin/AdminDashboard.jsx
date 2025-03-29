@@ -35,48 +35,69 @@ const AdminDashboard = () => {
 
     if (user.role === "admin") fetchUsers(); // Fetch only if admin
   }, [user]);
-
-  // ✅ Fetch All Guides
-  useEffect(() => {
-    const fetchGuides = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`${BASE_URL}/admin/guides`, {
-          method: "GET",
-          headers: { "content-type": "application/json" },
-          credentials: "include",
-        });
-
-        const result = await res.json();
-        if (res.ok) {
-          setGuides(result.data);
-        } else {
-          console.error(result.message);
-        }
-      } catch (err) {
-        console.error("Error fetching guides:", err);
+  const fetchGuides = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${BASE_URL}/admin/guides`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // Ensure backend supports credentials
+      });
+  
+      const result = await res.json();
+      if (res.ok) {
+        setGuides(result.data);
+      } else {
+        console.error("Error fetching guides:", result.message);
       }
-      setLoading(false);
-    };
-
-    if (user.role === "admin") fetchGuides(); // Fetch only if admin
+    } catch (err) {
+      console.error("Error fetching guides:", err);
+    }
+    setLoading(false);
+  };
+  
+  // ✅ Fetch guides when component mounts or user changes
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      fetchGuides();
+    }
   }, [user]);
-
-  // ✅ Approve Guide
+  
+  // ✅ Now `fetchGuides` is accessible here
   const handleApproveGuide = async (id) => {
-    if (!window.confirm("Are you sure you want to approve this guide?")) return;
-
+    const name = prompt("Enter guide's name:");
+    const location = prompt("Enter guide's location:");
+    const experience = prompt("Enter years of experience:");
+    const languages = prompt("Enter languages spoken (comma separated):");
+    const photo = prompt("Enter guide's photo URL:");
+    const pricePerHour = prompt("Enter guide's hourly price:");
+  
+    if (!name || !location || !experience || !languages || !photo || !pricePerHour) {
+      alert("All fields are required!");
+      return;
+    }
+  
     try {
       const res = await fetch(`${BASE_URL}/admin/users/promote/${id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
+        body: JSON.stringify({
+          name,
+          location,
+          experience: Number(experience),
+          languages: languages.split(",").map((lang) => lang.trim()),
+          photo,
+          pricePerHour: Number(pricePerHour),
+        }),
       });
-
+  
       const result = await res.json();
       if (res.ok) {
         alert("User successfully promoted to Guide!");
-        setUsers(users.map((u) => (u._id === id ? { ...u, status: "approved", role: "guide" } : u))); // Update UI
+        
+        // ✅ Now this will work because `fetchGuides` is accessible
+        fetchGuides();
       } else {
         alert("Failed to approve guide: " + result.message);
       }
@@ -84,6 +105,8 @@ const AdminDashboard = () => {
       console.error("Error approving guide:", err);
     }
   };
+  
+  
 
   // ✅ Reject Guide
   const handleRejectGuide = async (id) => {
@@ -113,7 +136,7 @@ const AdminDashboard = () => {
     if (!window.confirm("Are you sure you want to delete this guide?")) return;
 
     try {
-      const res = await fetch(`${BASE_URL}/admin/guides/${id}`, {
+      const res = await fetch(`${BASE_URL}/users/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -121,7 +144,7 @@ const AdminDashboard = () => {
       const result = await res.json();
       if (res.ok) {
         alert(result.message);
-        setGuides(guides.filter((g) => g._id !== id)); // Update UI
+        setGuides((prevGuides) => prevGuides.filter((g) => g._id !== id));   // Update UI
       } else {
         console.error(result.message);
       }

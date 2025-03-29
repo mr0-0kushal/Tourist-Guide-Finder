@@ -49,7 +49,6 @@ export const updateGuide = async (req, res) => {
 // ✅ Delete Guide
 export const deleteGuide = async (req, res) => {
     const id = req.params.id;
-
     try {
         const guide = await Guide.findById(id);
         if (!guide) {
