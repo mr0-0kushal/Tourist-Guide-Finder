@@ -52,6 +52,13 @@
     color: var(--heading-color);
 }
 
+.role-selection input{
+    width:20px;
+    height: 20px;
+    padding: 0px;
+    margin: auto;
+}
+
 .login__form input:focus{
     outline: none;
 }

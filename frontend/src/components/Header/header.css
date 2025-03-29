@@ -20,6 +20,19 @@
     font-size: 1.1rem;
 }
 
+.profile-btn {
+    text-decoration: none !important; /* Remove underline */
+    color: var(--secondary-color); /* Keep default text color */
+
+  }
+  
+  .profile-btn:hover, 
+  .profile-btn:focus, 
+  .profile-btn:active, 
+  .profile-btn:visited {
+    text-decoration: none !important;
+    color: inherit;
+  }
 .nav__item a:hover{
     color: inherit;
 }

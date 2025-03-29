@@ -1,5 +1,5 @@
 import express from "express";
-import { createGuide, getAllGuide, getSingleGuide , updateGuide , deleteGuide} from "../controllers/tourController.js";
+import { createGuide, getAllGuide, getSingleGuide , updateGuide , deleteGuide} from "../controllers/guideController.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();

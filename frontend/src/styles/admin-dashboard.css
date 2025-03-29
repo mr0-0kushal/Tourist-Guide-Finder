@@ -1,0 +1,51 @@
+.admin-dashboard {
+    padding: 20px;
+  }
+  
+  h2 {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .table {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  th {
+    background: #007bff;
+    color: white;
+    text-align: center;
+  }
+  
+  td {
+    text-align: center;
+  }
+  
+  .badge {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+  
+  .badge-primary {
+    background: #007bff;
+  }
+  
+  .badge-warning {
+    background: #ffc107;
+  }
+  
+  .badge-success {
+    background: #28a745;
+  }
+
+  .badge-danger {
+    background: #dc3545;
+  }   
+  
+  button {
+    border-radius: 5px;
+  }
+  

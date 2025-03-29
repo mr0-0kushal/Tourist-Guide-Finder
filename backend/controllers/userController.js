@@ -110,3 +110,19 @@ export const getAllUser = async (req, res) => {
         })
     }
 };
+
+// User Profile
+export const getUserProfile = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const user = await User.findById(id).select("-password"); // Exclude password
+  
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
+      }
+  
+      res.status(200).json({ success: true, data: user });
+    } catch (err) {
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  };

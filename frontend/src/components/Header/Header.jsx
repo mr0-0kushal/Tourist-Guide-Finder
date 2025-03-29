@@ -84,7 +84,7 @@ const Header = () => {
 
               {
                 user ? (<>
-                  <h5 className="mb-0">{user.username}</h5>
+                  <Link to='/users/profile'><h5 className="mb-0 profile-btn">{user.username}</h5></Link>
                   <Button className="btn btn-dark" onClick={logout}>Logout</Button>
                 </>) : (<>
                   <Button className='btn secondary__btn'>

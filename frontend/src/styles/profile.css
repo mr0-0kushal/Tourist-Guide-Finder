@@ -1,0 +1,133 @@
+/* 📌 Profile Page Styling */
+.profile-page {
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+/* Profile Card */
+.profile-container {
+  background: white;
+  max-width: 550px;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  margin: auto;
+}
+
+.profile-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Profile Header */
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 5px solid #007bff;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.profile-img:hover {
+  border-color: #00d4ff;
+  transform: scale(1.05);
+}
+
+/* User Name */
+.profile-header h2 {
+  margin-top: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* Role Badge */
+.role-badge {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.badge {
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.badge-primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.badge-success {
+  background: #28a745;
+  color: #fff;
+}
+
+/* Tourist Details */
+.tourist-details,
+.guide-details {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+
+.tourist-details h5,
+.guide-details h5 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+/* Profile Buttons */
+.text-center .btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0056b3, #009acd);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-container {
+    max-width: 90%;
+  }
+
+  .profile-img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .profile-header h2 {
+    font-size: 22px;
+  }
+
+  .text-center .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
