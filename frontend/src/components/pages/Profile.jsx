@@ -3,23 +3,24 @@ import "../../styles/profile.css"; // Import your CSS file for styling
 import { Container, Row, Col, Button } from "reactstrap";
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-    const { id } = useParams();
+    // const { id } = useParams();
     const { user } = useContext(AuthContext);
-    const { _id, username, email, photo, role, reviews } = user;
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`${BASE_URL}/users/${_id}/profile`, {
-            method:'get',
+        const res = await fetch(`${BASE_URL}/users/${user._id}/profile`, {
+            method:'GET',
             headers:{
               'content-type':'application/json',
+              'Authorization': `Bearer ${user.token}`,
             },
             credentials:'include',
+
         });
 
         const result = await res.json();
