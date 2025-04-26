@@ -22,7 +22,7 @@ import Newsletter from '../../shared/Newsletter'
 const Home = () => {
   return  <>
       {/*==================hero section start====================*/}
-    <section>
+    <section className='mt-12'>
       <Container>
         <Row>
           <Col lg='6'>
@@ -131,7 +131,7 @@ const Home = () => {
                     We travel, some of us forever, to seek other states, other lives, other souls.
                     </p>
                   </div>
-                  <div className="counter__wrapper d-flex align-items-center gap-5">
+                  <div className="counter__wrapper grid grid-cols-3 align-items-center gap-5">
                     <div className="counter__box">
                       <span>12k+</span>
                       <h6>Successful Trips!</h6>

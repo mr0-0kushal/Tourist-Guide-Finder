@@ -3,7 +3,6 @@ import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/login.css";
 import loginImg from "../../assets/images/login.png";
-import userIcon from "../../assets/images/user.png";
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
 
@@ -13,18 +12,22 @@ const Login = () => {
     password: "",
   });
 
-  const [role, setRole] = useState("user"); // Default role is 'user'
+  const [role, setRole] = useState("user");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setError("");
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch({ type: "LOGIN_START" });
+    setLoading(true);
+    setError("");
 
     try {
       const loginUrl =
@@ -39,7 +42,7 @@ const Login = () => {
 
       const result = await res.json();
       if (!res.ok) {
-        alert(result.message);
+        setError(result.message);
         return;
       }
 
@@ -54,33 +57,32 @@ const Login = () => {
         navigate("/");
       }
     } catch (err) {
+      setError("An error occurred. Please try again.");
       dispatch({ type: "LOGIN_FAILURE", payload: err.message });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <section>
+    <section className="login-section">
       <Container>
         <Row>
           <Col lg="8" className="m-auto">
-            <div className="login__container d-flex flex-column md:flex-row md:w-[70%] rounded-2xl mx-auto">
-              <div className="login__img md:w-full">
-                <img src={loginImg} alt="Login" className="md:h-full mx-auto" />
+            <div className="login__container fade-in">
+              <div className="login__img">
+                <img src={loginImg} alt="Login" />
               </div>
-              <div className="login__form w-full rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none">
-                <div className="user">
-                  <img src={userIcon} alt="User Icon" />
-                </div>
-                <h2>Login</h2>
+              <div className="login__form">
+                <h2>Welcome Back!</h2>
                 <Form onSubmit={handleLogin}>
                   <FormGroup>
-                    <label>Choose Role:</label>
                     <select
-                      className="form-control"
+                      className={`form-control ${error ? 'error' : ''}`}
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
                     >
-                      <option value="user">User (Tourist/Guide)</option>
+                      <option value="user">Tourist/Guide</option>
                       <option value="admin">Admin</option>
                     </select>
                   </FormGroup>
@@ -90,7 +92,9 @@ const Login = () => {
                       placeholder="Email"
                       required
                       id="email"
+                      value={credentials.email}
                       onChange={handleChange}
+                      className={error ? 'error' : ''}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -99,15 +103,22 @@ const Login = () => {
                       placeholder="Password"
                       required
                       id="password"
+                      value={credentials.password}
                       onChange={handleChange}
+                      className={error ? 'error' : ''}
                     />
                   </FormGroup>
-                  <Button className="btn secondary__btn auth__btn" type="submit">
-                    Login
+                  {error && <div className="error-message">{error}</div>}
+                  <Button 
+                    className={`auth__btn ${loading ? 'loading' : ''}`} 
+                    type="submit"
+                    disabled={loading}
+                  >
+                    {loading ? 'Logging in...' : 'Login'}
                   </Button>
                 </Form>
                 <p>
-                  Don't have an account? <Link to="/register">Register Here!</Link>
+                  Don't have an account?<Link to="/register">Create Account</Link>
                 </p>
               </div>
             </div>

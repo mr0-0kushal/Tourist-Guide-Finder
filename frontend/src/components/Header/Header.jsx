@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from 'react'
+import React, { useRef, useEffect, useContext, useState } from 'react'
 // import { Container, Row, Button, ButtonDropdown } from 'reactstrap'
 import { Container, Row, Button} from 'reactstrap'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
@@ -33,12 +33,21 @@ const Header = () => {
   const headerRef = useRef(null)
   const navigate = useNavigate();
   const { user, dispatch } = useContext(AuthContext)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' })
     navigate("/")
+    setIsMenuOpen(false)
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const handleNavClick = () => {
+    setIsMenuOpen(false)
+  }
 
   const stickyHeaderFunc = () => {
     window.addEventListener('scroll', () => {
@@ -56,44 +65,72 @@ const Header = () => {
     return window.removeEventListener('scroll', stickyHeaderFunc)
   })
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && !event.target.closest('.navigation') && !event.target.closest('.mobile__menu')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isMenuOpen])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
+
   return <header className='header' ref={headerRef}>
     <Container>
       <Row>
-        <div className='nav_wrapper d-flex align-items-center justify-content-between'>
+        <div className='nav_wrapper d-flex align-items-center justify-content-between w-screen'>
           {/*=============logo===========*/}
           <div className='logo'>
-            <img src={logo} alt="" />
+            <Link to="/" onClick={handleNavClick}>
+              <img src={logo} alt="RideNGuide Logo" />
+            </Link>
           </div>
           {/*=============logo end========== */}
           {/*=============menu start===========*/}
-          <div className='navigation'>
-            <ul className='menu d-flex align-items-left gap-2 custom-menu'>
+          <div className={`navigation ${isMenuOpen ? 'active' : ''}`}>
+            <ul className={`menu d-flex align-items-center gap-4 ${isMenuOpen ? 'active' : ''}`}>
               {
                 nav_links.map((item, index) => (
                   <li className='nav__item' key={index}>
-                    <NavLink to={item.path} className={navClass => navClass.isActive ? "active__link" : ""}>
+                    <NavLink 
+                      to={item.path} 
+                      className={navClass => navClass.isActive ? "active__link" : ""}
+                      onClick={handleNavClick}
+                    >
                       {item.display}</NavLink>
                   </li>
                 ))}
             </ul>
-          </div>
-
-          {/*=============menu end============= */}
+              {/*=============menu end============= */}
           <div className='nav_right d-flex align-items-center gap-4'>
-            <div className='nav__btns d-flex align-items-center gap-4'>
+            <div className='nav__btns d-flex align-items-center gap-4 mx-auto'>
 
               {
                 user ? (<>
-                  <Link to='/users/profile'><h5 className="mb-0 profile-btn">{user.username}</h5></Link>
+                  <Link to='/users/profile' className="profile-btn" onClick={handleNavClick}>{user.username}</Link>
                   <Button className="btn btn-dark" onClick={logout}>Logout</Button>
                 </>) : (<>
                   <Button className='btn secondary__btn'>
-                    <Link to='/login'>
+                    <Link to='/login' onClick={handleNavClick}>
                       Login
                     </Link>
                   </Button>
                   <Button className='btn primary__btn'>
-                    <Link to='/register'>
+                    <Link to='/register' onClick={handleNavClick}>
                       Register
                     </Link>
                   </Button>
@@ -102,10 +139,11 @@ const Header = () => {
               }
 
             </div>
-            <span className='mobile__menu'>
-              <i class="ri-menu-line"> </i>
-            </span>
           </div>
+              </div>
+            <span className='mobile__menu' onClick={toggleMenu}>
+              <i className={`ri-${isMenuOpen ? 'close-line' : 'menu-line'}`}></i>
+            </span>
         </div>
       </Row>
     </Container>
