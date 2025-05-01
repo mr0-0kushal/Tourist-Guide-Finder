@@ -23,14 +23,21 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
+      default: "tourist",
       enum: ["admin", "guide", "tourist"], // Added "user" as an option
     },
     status:{
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
-    }
+    },
+    location: {
+      type: String,
+      default: "",
+    },
+    
   },
+  
   { timestamps: true }
 );
 

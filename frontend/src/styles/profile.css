@@ -1,64 +1,127 @@
-/* 📌 Profile Page Styling */
-.profile-page {
-  background: linear-gradient(135deg, #007bff, #00d4ff);
+/* 📌 Dashboard Page */
+.dashboard-page {
+  background-color: #f9f9f9;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 0;
 }
 
-/* Profile Card */
-.profile-container {
-  background: white;
-  max-width: 550px;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
-  margin: auto;
-}
-
-.profile-container:hover {
-  transform: translateY(-5px);
-}
-
-/* Profile Header */
-.profile-header {
+/* 📌 Sidebar */
+.dashboard-sidebar {
+  background-color: #333;
+  color: white;
+  padding: 20px;
   text-align: center;
+  width: 250px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.dashboard-sidebar .sidebar-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 3px solid #00d1b2;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.dashboard-sidebar .sidebar-img:hover {
+  transform: scale(1.05);
+  border-color: #00d4ff;
+}
+
+.dashboard-sidebar h3 {
+  margin: 10px 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #00d1b2;
+}
+
+.dashboard-sidebar .role {
+  font-size: 14px;
+  color: #bbb;
   margin-bottom: 20px;
 }
 
-.profile-img {
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.sidebar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.sidebar-links a:hover {
+  color: #00d1b2;
+}
+
+/* 📌 Main Content */
+.dashboard-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.dashboard-navbar {
+  background-color: #00d1b2;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 📌 Profile Content */
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.profile-header .profile-img {
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  border: 5px solid #007bff;
+  border: 5px solid #00d1b2;
   object-fit: cover;
-  transition: 0.3s;
+  transition: border-color 0.3s, transform 0.3s;
 }
 
-.profile-img:hover {
-  border-color: #00d4ff;
+.profile-header .profile-img:hover {
   transform: scale(1.05);
+  border-color: #00d4ff;
 }
 
-/* User Name */
 .profile-header h2 {
   margin-top: 15px;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
   color: #222;
 }
 
-/* Role Badge */
 .role-badge {
+  margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
 }
 
 .badge {
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 8px;
   font-size: 14px;
   text-transform: uppercase;
@@ -66,55 +129,259 @@
 
 .badge-primary {
   background: #007bff;
-  color: #fff;
+  color: white;
 }
 
 .badge-success {
   background: #28a745;
+  color: white;
+}
+
+/* 📌 Details Section */
+.details-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.details-section h5 {
+  font-size: 20px;
+  color: #00d1b2;
+  margin-bottom: 10px;
+}
+
+/* 📌 Button */
+.edit-btn {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #00d1b2, #00d4ff);
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #009bb5, #00acd4);
+  transform: translateY(-2px);
+}
+
+/* 📌 Responsive */
+@media (max-width: 992px) {
+  .dashboard-sidebar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-page {
+    flex-direction: column;
+  }
+
+  .dashboard-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
+
+  .dashboard-main {
+    padding: 10px;
+  }
+
+  .dashboard-navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-header .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-header h2 {
+    font-size: 22px;
+  }
+}
+/* 📌 Profile Page Styling - Soothing Modern Look */
+.profile-page {
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-x: hidden;
+}
+
+/* Profile Card with Glassmorphism */
+.profile-container {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  max-width: 550px;
+  border-radius: 20px;
+  padding: 35px 25px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+  margin: auto;
+}
+
+.profile-container:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Profile Header */
+.profile-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.profile-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 4px solid #6a11cb;
+  object-fit: cover;
+  transition: all 0.4s ease; 
+}
+
+.profile-img:hover {
+  border-color: #2575fc;
+  transform: scale(1.07);
+}
+
+/* User Name */
+.profile-header h2 {
+  margin-top: 18px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Role Badge */
+.role-badge {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.badge-primary {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: #fff;
 }
 
-/* Tourist Details */
+.badge-success {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: #fff;
+}
+
+/* Tourist/Guide Details */
 .tourist-details,
 .guide-details {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 18px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .tourist-details h5,
 .guide-details h5 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  color: #007bff;
-  margin-bottom: 10px;
+  color: #2575fc;
+  margin-bottom: 12px;
 }
 
-/* Profile Buttons */
+/* Buttons */
 .text-center .btn {
-  margin-top: 15px;
-  padding: 10px 20px;
+  margin-top: 20px;
+  padding: 12px 25px;
   font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: 0.3s ease;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #007bff, #00d4ff);
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
   border: none;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(135deg, #0056b3, #009acd);
+.text-center .btn:hover {
+  background: linear-gradient(135deg, #5b0eaf, #1e63db);
+  transform: translateY(-3px);
+}
+
+/* Sidebar (if needed) */
+.sidebar {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sidebar-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid #6a11cb;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.sidebar-img:hover {
+  border-color: #2575fc;
+  transform: scale(1.05);
+}
+
+.sidebar h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6a11cb;
+  margin-bottom: 15px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  padding: 10px 0;
+  font-size: 16px;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.sidebar-nav li:hover {
+  color: #2575fc;
 }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+  .profile-container {
+    max-width: 85%;
+  }
+}
+
 @media (max-width: 768px) {
   .profile-container {
-    max-width: 90%;
+    max-width: 95%;
+    padding: 30px 20px;
   }
 
   .profile-img {
@@ -127,7 +394,52 @@
   }
 
   .text-center .btn {
-    font-size: 14px;
-    padding: 8px 16px;
+    font-size: 15px;
+    padding: 10px 22px;
   }
+
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-container {
+    padding: 25px 15px;
+  }
+
+  .profile-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .profile-header h2 {
+    font-size: 20px;
+  }
+
+  .text-center .btn {
+    font-size: 14px;
+    padding: 9px 20px;
+  }
+}
+
+
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #22c55e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
 }

@@ -11,13 +11,15 @@ import GuideList from '../pages/GuideList'
 import GuideDetails from '../pages/GuideDetails'
 import Profile from './../pages/Profile'
 import AdminDashboard from '../Admin/AdminDashboard'
-
+import ProfileB from '../pages/ProfileB'
+import Messages from '../pages/Messages'
+import Settings from '../pages/Settings'
+import BookingD from '../pages/BookingD'
 
 const Routers = () => {
   return (
     <Routes>
         <Route path='/' element= {<Navigate to='/home'/>} />
-        <Route path='/users/profile' element={<Profile/>} />
         <Route path='/home' element={<Home/>} />
         <Route path='/tours' element={<Tours/>} />
         <Route path='/guides' element={<GuideList/>} />
@@ -28,8 +30,17 @@ const Routers = () => {
         <Route path='/thank-you' element={<ThankYou/>} />
         <Route path='/tours/search' element={<SearchResultList/>} />
         <Route path='/admin' element={<AdminDashboard/>} />
-        
 
+
+        {/* Dashboard Main with Nested Routes */}
+      <Route path='/users/profile' element={<Profile/>}>
+        <Route index element={<ProfileB />} />
+        <Route path='profile' element={<ProfileB />} />
+        <Route path="tours" element={<Tours />} />
+        <Route path="bookings" element={<BookingD />} />
+        <Route path="messages" element={<Messages />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
     </Routes>
   )
 }

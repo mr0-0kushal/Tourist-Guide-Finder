@@ -12,6 +12,9 @@ import bookingRoute from './routes/bookings.js'
 import guideBookingRoute from './routes/guide-booking.js'
 import paymentRoute from './routes/payment.js'
 import guideAdminRoute from './routes/admin.js'
+import uploadRoute from './routes/upload.js';
+
+
 
 dotenv.config();
 
@@ -58,6 +61,7 @@ app.use("/api/v1/guide-booking" , guideBookingRoute);
 app.use("/api/v1/guide" , guideRoute);
 app.use("/api/v1/payment" , paymentRoute);
 app.use("/api/v1/admin" , guideAdminRoute);
+app.use('/api/v1/upload', uploadRoute);
 
 
 

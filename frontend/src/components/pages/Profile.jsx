@@ -1,86 +1,60 @@
-import React, { useEffect, useState, useContext } from "react";
-import "../../styles/profile.css"; // Import your CSS file for styling
+import React, { useContext } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { BASE_URL } from "../../utils/config";
-// import { useParams } from 'react-router-dom';
+import "../../styles/profile.css"; // your custom CSS
 
 const Profile = () => {
-    // const { id } = useParams();
-    const { user } = useContext(AuthContext);
-  const [profile, setProfile] = useState(null);
+  const { user, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res = await fetch(`${BASE_URL}/users/${user._id}/profile`, {
-            method:'GET',
-            headers:{
-              'content-type':'application/json',
-              'Authorization': `Bearer ${user.token}`,
-            },
-            credentials:'include',
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+  };
 
-        });
+  const Sidebar = () => (
+    <div className="dashboard-sidebar">
+      <img
+        src={user.photo}
+        alt="User"
+        className="sidebar-img mx-auto"
+      />
+      <h3>{user.username}</h3>
+      <p className="role">{user.role}</p>
+      <nav className="sidebar-links">
+        <Link to="profile">Profile</Link>
+        <Link to="tours">Tours</Link>
+        <Link to="bookings">Bookings</Link>
+        <Link to="messages">Messages</Link>
+        <Link to="settings">Settings</Link>
+        <Button color="danger" size="sm" onClick={handleLogout} className="mt-3">
+          Logout
+        </Button>
+      </nav>
+    </div>
+  );
 
-        const result = await res.json();
-        if (res.ok) {
-          setProfile(result.data);
-        } else {
-          console.error(result.message);
-        }
-      } catch (err) {
-        console.error("Error fetching profile:", err);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
-  if (!profile) {
-    return <h2 className="text-center mt-5">Loading Profile...</h2>;
-  }
+  const Navbar = () => (
+    <div className="dashboard-navbar d-flex justify-content-between align-items-center p-3 mb-3 bg-light rounded">
+      <h5 className="mb-0">Dashboard</h5>
+      <Button color="danger" size="sm" onClick={handleLogout}>
+        Logout
+      </Button>
+    </div>
+  );
 
   return (
-    <section className="profile-page">
-      <Container>
+    <section className="dashboard-page mt-5">
+      <Container fluid>
         <Row>
-          <Col lg="8" className="m-auto">
-            <div className="profile-container p-4 rounded shadow">
-              <div className="profile-header text-center">
-                <img
-                  src={profile.photo || "https://via.placeholder.com/150"}
-                  alt="User Profile"
-                  className="profile-img rounded-circle shadow-lg"
-                />
-                <h2 className="mt-3">{profile.username}</h2>
-                <p className="role-badge text-black">
-                  <strong>Role:</strong> <span className={`badge ${profile.role === "guide" ? "badge-primary" : "badge-success"}`}>{profile.role}</span>
-                </p>
-              </div>
-
-              {/* 🟢 Tourist Profile View */}
-              {profile.role === "tourist" && (
-                <div className="tourist-details mt-4">
-                  <h5>Tourist Information</h5>
-                  <p>Email: {profile.email}</p>
-                  <p>Joined on: {new Date(profile.createdAt).toLocaleDateString()}</p>
-                </div>
-              )}
-
-              {/* 🔵 Guide Profile View */}
-              {profile.role === "guide" && (
-                <div className="guide-details mt-4">
-                  <h5>Guide Information</h5>
-                  <p>Email: {profile.email}</p>
-                  <p>Experience: 5+ years (example)</p>
-                  <p>Location: New York (example)</p>
-                </div>
-              )}
-
-              <div className="text-center mt-4">
-                <Button color="primary">Edit Profile</Button>
-              </div>
+          <Col lg="3" md="4" sm="12">
+            <Sidebar />
+          </Col>
+          <Col lg="9" md="8" sm="12">
+            <Navbar />
+            <div className="dashboard-content">
+              <Outlet /> {/* Render nested routes here */}
             </div>
           </Col>
         </Row>

@@ -21,34 +21,78 @@ export const createUser = async (req, res) => {
         });
     }
 };
+// Backend: promote user to guide
+const promoteUserToGuide = async (req, res) => {
+  try {
+    const { userId } = req.params;
 
-//update User
-export const updateUser = async (req, res) => {
-    const id = req.params.id;
-    try {
-        const updatedUser = await User.findByIdAndUpdate(id,
-            {
-                $set: req.body
-            },
-            {
-                new: true
-            });
-
-        res.status(200).json({
-            success: true,
-            message: 'Successfully updated',
-            data: updatedUser
-        });
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            success: false,
-            message: 'Failed to update'
-        });
+    // Fetch the user data
+    const user = await User.findById(userId);
+    if (!user || user.role !== "user") {
+      return res.status(400).json({ message: "User not found or already a guide" });
     }
+
+    // Transfer user data to the Guide model
+    const guide = new Guide({
+      name: user.name,
+      email: user.email,
+      location: user.location,
+      experience: user.experience,
+      languages: user.languages,
+      photo: user.photo,
+      pricePerHour: user.pricePerHour,
+    });
+
+    // Save the guide
+    await guide.save();
+
+    // Remove the user from the User model
+    await User.findByIdAndDelete(userId);
+
+    res.status(200).json({ message: "User promoted to guide successfully", guide });
+  } catch (error) {
+    res.status(500).json({ message: "Error promoting user to guide", error });
+  }
 };
 
+
+export const updateUser = async (req, res) => {
+  const id = req.params.id;
+
+  // Only allow these fields to be updated
+  const allowedUpdates = ['username', 'location', 'photo'];
+  const updates = {};
+
+  for (const key of allowedUpdates) {
+    if (req.body[key] !== undefined) {
+      updates[key] = req.body[key];
+    }
+  }
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: updates },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // ✅ Send the user object directly (include role and other fields)
+    res.status(200).json(updatedUser);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update",
+    });
+  }
+};
+
+  
 //delete User
 
 export const deleteUser = async (req, res) => {

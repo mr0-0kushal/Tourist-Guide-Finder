@@ -52,9 +52,9 @@ const Login = () => {
       if (role === "admin") {
         navigate("/admin");
       } else if (result.data.role === "guide") {
-        navigate("/");
+        navigate("/users/profile");
       } else {
-        navigate("/");
+        navigate("/users/profile");
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
