@@ -7,6 +7,11 @@ const guideSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    email:{
+      type:String,
+      required:true,
+      unique:true
+    },
     location: {
       type: String,
       required: true,

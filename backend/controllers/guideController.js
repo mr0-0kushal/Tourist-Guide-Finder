@@ -200,7 +200,7 @@ export const promoteUserToGuide = async (req, res) => {
 
 export const rejectUserForGuide = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.params.userId;
         const user = await User.findById(userId);
 
         if (!user) {

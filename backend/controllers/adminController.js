@@ -57,3 +57,29 @@ export const approveGuide = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to approve guide" });
   }
 };
+
+
+export const rejectGuide = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId); // Find the user
+    if (!user) return res.status(404).json({ message: "User not found." });
+
+    if (user.role !== "guide") {
+      return res.status(400).json({ message: "User is not a guide." });
+    }
+
+    // Remove guide role from user
+    user.role = "user"; // or any other default role
+    await user.save();
+
+    // Optionally, delete the guide data from the Guide collection
+    await Guide.findOneAndDelete({ userId });
+
+    res.status(200).json({ message: "Guide rejected successfully!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error rejecting guide." });
+  }
+};

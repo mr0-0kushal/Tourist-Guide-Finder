@@ -15,6 +15,7 @@ import ProfileB from '../pages/ProfileB'
 import Messages from '../pages/Messages'
 import Settings from '../pages/Settings'
 import BookingD from '../pages/BookingD'
+import RentalServices from '../pages/RentalServices'
 
 const Routers = () => {
   return (
@@ -30,6 +31,7 @@ const Routers = () => {
         <Route path='/thank-you' element={<ThankYou/>} />
         <Route path='/tours/search' element={<SearchResultList/>} />
         <Route path='/admin' element={<AdminDashboard/>} />
+        <Route path='/rentals' element={<RentalServices/>} />
 
 
         {/* Dashboard Main with Nested Routes */}

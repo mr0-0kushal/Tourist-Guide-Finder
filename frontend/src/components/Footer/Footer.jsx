@@ -15,12 +15,20 @@ const quick__links = [
     path: '/tours',
     display: 'Tours',
   },
+  {
+    path: '/rentals',
+    display: 'Rental Services',
+  },
 ];
 
 const quick__links2 = [
   {
     path: '/tours',
     display: 'Tours',
+  },
+  {
+    path: '/guides',
+    display: 'Guides',  
   },
   {
     path: '/login',

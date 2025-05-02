@@ -27,7 +27,7 @@ const ProfileB = () => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/users/${user._id}`, {
+      const response = await fetch(`${BASE_URL}/users/${user.role == "guide"? "6814f7bfd854dd707ff59a6a" :user._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

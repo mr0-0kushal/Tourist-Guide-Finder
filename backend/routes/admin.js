@@ -25,9 +25,9 @@ router.get("/guides", getAllGuidesForAdmin);
 router.post("/users/promote/:id", promoteUserToGuide);
 
 // Delete guide
-router.delete("/guides/:id", deleteGuide);
+router.delete("/delete-user/:id", deleteGuide);
 
-//reject guide
-router.post("/users/reject/:id", verifyAdmin, rejectUserForGuide);
+// Reject guide route
+router.patch("/reject-guide/:userId", rejectUserForGuide);
 
 export default router;
